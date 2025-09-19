@@ -1,0 +1,19 @@
+.itemContainer {
+  margin: 20px;
+  padding: 20px;
+  border: #f68338 1px solid;
+  div {
+    margin: 10px 0px;
+  }
+  ul {
+    list-style-type: none;
+  }
+  .inputContainer {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    input {
+      height: 100%;
+    }
+  }
+}
