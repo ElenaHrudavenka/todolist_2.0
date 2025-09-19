@@ -1,14 +1,10 @@
-
-import './App.css'
+import styles from './App.module.scss'
 import {TodolistItem} from "./TodolistItem.tsx";
 
-function App() {
-
+export const App = ()=> {
   return (
-    <div className="app">
+    <div className={styles.app}>
         <TodolistItem/>
     </div>
   )
 }
-
-export default App
