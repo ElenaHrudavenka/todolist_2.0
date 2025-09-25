@@ -1,5 +1,5 @@
 import styles from './App.module.scss'
-import {TodolistItem} from "./TodolistItem.tsx";
+import {TodolistItem} from "./TodolistItem/TodolistItem.tsx";
 import { v4 } from 'uuid';
 
 export type Task = {

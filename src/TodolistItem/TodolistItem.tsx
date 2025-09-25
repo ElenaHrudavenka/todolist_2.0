@@ -1,5 +1,6 @@
 import styles from './TodolistItem.module.scss'
-import type {Task} from "./App.tsx";
+import type {Task} from "../App.tsx";
+import {Button} from "../Button/Button.tsx";
 
 type TodolistItemProps = {
     title: string,
@@ -12,7 +13,7 @@ export const TodolistItem = ({title, tasks}: TodolistItemProps) => {
             <h3>{title}</h3>
             <div className={styles.inputContainer}>
                 <input type="text"/>
-                <button>X</button>
+                <Button title="x"/>
             </div>
             { tasks.length ===0 ? (
                 <p>There is no task</p>
@@ -24,6 +25,7 @@ export const TodolistItem = ({title, tasks}: TodolistItemProps) => {
                                 <li key={task.id}>
                                     <input type="checkbox" checked={task.isDone} onChange={()=>{}}/>
                                     <span>{task.title}</span>
+                                    <Button title="x"/>
                                 </li>
                             )
                         })
@@ -31,9 +33,9 @@ export const TodolistItem = ({title, tasks}: TodolistItemProps) => {
                 </ul>
             )}
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <Button title="All"/>
+                <Button title="Active"/>
+                <Button title="Completed"/>
             </div>
         </div>
     )
