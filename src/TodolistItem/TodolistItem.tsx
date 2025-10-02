@@ -4,16 +4,17 @@ import {Button} from "../Button/Button.tsx";
 
 type TodolistItemProps = {
     title: string,
-    tasks: Array<Task>
+    tasks: Array<Task>,
+    deleteTask: (id: string) => void,
 }
 
-export const TodolistItem = ({title, tasks}: TodolistItemProps) => {
+export const TodolistItem = ({title, tasks, deleteTask}: TodolistItemProps) => {
     return (
         <div className={styles.itemContainer}>
             <h3>{title}</h3>
             <div className={styles.inputContainer}>
                 <input type="text"/>
-                <Button title="x"/>
+                <Button title="+" onClick={()=> {}}/>
             </div>
             { tasks.length ===0 ? (
                 <p>There is no task</p>
@@ -23,9 +24,9 @@ export const TodolistItem = ({title, tasks}: TodolistItemProps) => {
                         tasks.map((task:Task) => {
                             return (
                                 <li key={task.id}>
-                                    <input type="checkbox" checked={task.isDone} onChange={()=>{}}/>
+                                    <input type="checkbox" checked={task.isDone} onChange={()=> {}}/>
                                     <span>{task.title}</span>
-                                    <Button title="x"/>
+                                    <Button title="x" onClick={() => deleteTask(task.id)}/>
                                 </li>
                             )
                         })
