@@ -3,24 +3,28 @@ $button-bg: #1e1c1c;
 $button-hover: #f68338;
 
 .buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6em;
+  border: 1px solid $button-bg;
   border-radius: 8px;
-  border: 1px solid $button-b;
-  padding: 0.6em 1.2em;
+  font-family: inherit;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: $button-bg;
+  background-color: rgba(230, 230, 230, 0.1);
   cursor: pointer;
   transition: border-color 0.25s;
 
   &:hover {
     border-color: $button-hover;
+    color: $button-hover;
     transform: scale(1.01);
   }
 
   &:focus,
   &:focus-visible {
-    background-color: #171616;
-    border: 1px solid $button-hover;
+    background-color: rgba(230, 230, 230, 0.1);
+    opacity: 40%;
   }
 }
