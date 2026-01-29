@@ -5,23 +5,33 @@ import { Button } from "@/shared/ui/Button";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { filterOptions } from '@/shared/ui/TodolistItem/models/constants';
+import type { RefObject } from 'react';
 
 interface TodolistItemProps {
     title: string;
     tasks: Array<Task>;
+    inputValue: string;
+    setInputValue: (inputValue: string) => void;
     removeTask: (id: string) => void;
+    addTask: (inputValue: string) => void;
+    inputRef: RefObject<HTMLInputElement>;
 }
 
-const TodolistItem = ({ title, tasks, removeTask }: TodolistItemProps) => {
+const TodolistItem = ({ title, tasks, inputValue, setInputValue, removeTask, addTask, inputRef }: TodolistItemProps) => {
     return (
         <div className={styles.itemContainer}>
             <h3>{title}</h3>
             <div className={styles.inputContainer}>
-                <input type="text" />
+                <input
+                    type="text"
+                    ref={inputRef}
+                    value={inputValue}
+                    onChange={e => setInputValue(e.target.value)}
+                />
                 <Button
-                    onClick={() => { }}
+                    onClick={() => addTask(inputValue)}
                 >
-                    <AddIcon fontSize='medium'/>
+                    <AddIcon fontSize='medium' />
                 </Button>
             </div>
             <hr />
@@ -40,7 +50,7 @@ const TodolistItem = ({ title, tasks, removeTask }: TodolistItemProps) => {
                                     <Button
                                         onClick={() => removeTask(task.id)}
                                     >
-                                        <RemoveIcon fontSize='medium'/>
+                                        <RemoveIcon fontSize='medium' />
                                     </Button>
                                 </li>
                             )
