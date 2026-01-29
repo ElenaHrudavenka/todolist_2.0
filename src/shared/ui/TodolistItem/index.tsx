@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { filterOptions } from '@/shared/ui/TodolistItem/models/constants';
 import type { RefObject } from 'react';
+import type { Filter } from '@/shared/ui/TodolistItem/models/types';
 
 interface TodolistItemProps {
     title: string;
@@ -14,10 +15,12 @@ interface TodolistItemProps {
     setInputValue: (inputValue: string) => void;
     removeTask: (id: string) => void;
     addTask: (inputValue: string) => void;
-    inputRef: RefObject<HTMLInputElement>;
+    filterTasks: (filter: Filter) => void;
+    changeTaskStatus: (id: string) => void;
+    inputRef: RefObject<HTMLInputElement | null>;
 }
 
-const TodolistItem = ({ title, tasks, inputValue, setInputValue, removeTask, addTask, inputRef }: TodolistItemProps) => {
+const TodolistItem = ({ title, tasks, inputValue, setInputValue, removeTask, addTask, filterTasks, changeTaskStatus, inputRef }: TodolistItemProps) => {
     return (
         <div className={styles.itemContainer}>
             <h3>{title}</h3>
@@ -27,6 +30,9 @@ const TodolistItem = ({ title, tasks, inputValue, setInputValue, removeTask, add
                     ref={inputRef}
                     value={inputValue}
                     onChange={e => setInputValue(e.target.value)}
+                    onKeyDown={(e) => {
+                        e.key === 'Enter' && addTask(inputValue);
+                    }}
                 />
                 <Button
                     onClick={() => addTask(inputValue)}
@@ -44,7 +50,7 @@ const TodolistItem = ({ title, tasks, inputValue, setInputValue, removeTask, add
                             return (
                                 <li key={task.id}>
                                     <div className={styles.item}>
-                                        <input type="checkbox" checked={task.isDone} onChange={() => { }} />
+                                        <input type="checkbox" checked={task.isDone} onChange={() => changeTaskStatus(task.id)} />
                                         <span>{task.title}</span>
                                     </div>
                                     <Button
@@ -65,6 +71,7 @@ const TodolistItem = ({ title, tasks, inputValue, setInputValue, removeTask, add
                             key={option.value}
                             title={option.label}
                             width={option.width}
+                            onClick={() => filterTasks(option.value)}
                         />
                     ))
                 }
